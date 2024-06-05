@@ -1,0 +1,16 @@
+const imageUploadForm = document.getElementById('imageUploadForm');
+const imageInput = document.getElementById('imageInput');
+
+imageUploadForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const file = imageInput.files[0];
+  
+  // Upload file to Firebase Storage
+  const storageRef = firebase.storage().ref('images/' + file.name);
+  storageRef.put(file).then(() => {
+    alert('Image uploaded successfully');
+  }).catch(error => {
+    console.error('Error uploading image:', error);
+    alert('Error uploading image');
+  });
+});
